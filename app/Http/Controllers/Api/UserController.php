@@ -19,6 +19,12 @@ class UserController extends Controller
 
     public function verify(Request $request)
     {
+        $nickName = $request->get('nick_name', '');
 
+        $nickNameExists = User::byNickName($nickName)->exists();
+
+        return response()->json([
+            'message' => trans($nickNameExists ? 'messages.nick_name_already_exists' : 'messages.nick_name_available'),
+        ], $nickNameExists ? 409 : 200);
     }
 }

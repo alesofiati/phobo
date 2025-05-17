@@ -21,4 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'nick_name',
     ];
+
+    public function scopeByNickName($query, string $nickName)
+    {
+        return $query->where('nick_name', $nickName);
+    }
 }
