@@ -12,3 +12,12 @@ window.Echo = new Echo({
     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
+
+/** 
+ * Testing Channels & Events & Connections
+ */
+if (import.meta.env.MODE === 'development') {
+    window.Echo.channel('activity').listen('activity.created', console.log);
+    window.Echo.channel('activity').listen('activity.deleted', console.log);
+    window.Echo.channel('score').listen('score.updated', console.log);
+}
