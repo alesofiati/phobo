@@ -1,5 +1,7 @@
 import React from 'react'
 
 export default function Home() {
-  return <h1>Welcome to Home</h1>
+  return <main className='w-screen h-screen flex flex-col items-center justify-center'>
+    <a className="btn btn-primary" href='/sign-in'>Sign in</a>
+  </main>
 }
