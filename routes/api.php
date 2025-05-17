@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,5 +11,5 @@ Route::group([
 
     Route::post('/', [UserController::class, 'store'])->name('store');
     Route::post('/verify', [UserController::class, 'verify'])->name('verify');
-
+    Route::resource('rooms', RoomController::class);
 });
