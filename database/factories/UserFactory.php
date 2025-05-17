@@ -18,8 +18,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'nick_name' => fake()->unique()->name,
-            'expired_at' => now()->addDay(),
+            'nick_name' => fake()->unique()->name
         ];
     }
 }

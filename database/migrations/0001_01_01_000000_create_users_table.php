@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nick_name')->unique();
-            $table->dateTime('expired_at');
             $table->timestamps();
         });
     }
