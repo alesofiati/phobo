@@ -1,8 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::group([
+    'prefix' => 'users',
+    'as' => 'user.',
+], function () {
+
+    Route::post('/', [UserController::class, 'store'])->name('store');
+    Route::post('/verify', [UserController::class, 'verify'])->name('verify');
+
+});
