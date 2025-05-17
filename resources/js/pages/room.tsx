@@ -36,11 +36,10 @@ export default function Home() {
       created_at: new Date(),
     }
   ])
-  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const newActivityButtonRef = React.useRef<HTMLButtonElement>(null)
 
-
-  const showButtonConfetti = () => { 
-    const rect = buttonRef.current?.getBoundingClientRect()
+  const showButtonConfetti = (ref: React.RefObject<HTMLButtonElement | null>) => { 
+    const rect = ref.current?.getBoundingClientRect()
     if (!rect) return
 
     confetti({
@@ -54,7 +53,7 @@ export default function Home() {
   }
 
   const handleNewActivity = () => { 
-    showButtonConfetti()
+    showButtonConfetti(newActivityButtonRef);
 
     setActivities(activities => [
       {
@@ -72,7 +71,7 @@ export default function Home() {
   return (
     <div className='w-screen min-h-screen flex flex-col'>
       <div className="navbar fixed top-0 left-0 right-0 z-50 bg-base-300 shadow-sm justify-center">
-        <img src='/images/logo.svg' className='h-10'/>
+        <a href='/'><img src='/images/logo.svg' className='h-10'/></a>
       </div>
 
       <main className="w-full md:max-w-4xl mx-auto flex flex-row gap-8 h-full p-4 pt-24">
@@ -80,7 +79,7 @@ export default function Home() {
           <div className='card h-72 bg-red-400 shadow-xl'/>
           <div className='card h-40 bg-red-400 shadow-xl'/>
           
-          <button ref={buttonRef} onClick={handleNewActivity} className='btn h-12 btn-primary rounded-lg shadow-xl'>
+          <button ref={newActivityButtonRef} onClick={handleNewActivity} className='btn h-12 btn-primary rounded-lg shadow-xl'>
             New Activity
           </button>
 
