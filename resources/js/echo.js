@@ -16,6 +16,8 @@ window.Echo = new Echo({
 /** 
  * Testing Channels & Events & Connections
  */
-window.Echo.channel('activity').listen('activity.created', console.log);
-window.Echo.channel('activity').listen('activity.deleted', console.log);
-window.Echo.channel('score').listen('score.updated', console.log);
+if (import.meta.env.MODE === 'development') {
+    window.Echo.channel('activity').listen('activity.created', console.log);
+    window.Echo.channel('activity').listen('activity.deleted', console.log);
+    window.Echo.channel('score').listen('score.updated', console.log);
+}
