@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nick_name')->unique();
             $table->timestamps();
+            $table->index('nick_name');
         });
     }
 
