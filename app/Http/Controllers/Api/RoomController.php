@@ -3,16 +3,28 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if (!$request->get('nick_name')) {
+            return $this->errorResponse('nick_name is required', 400);
+        }
+
+        $rooms = Room::byUserNickName($request->get('nick_name'))
+            ->select('id', 'name', 'code', 'created_at')
+            ->paginate($request->get('per_page', 10));
+
+        return response()->json($rooms);
     }
 
     /**
