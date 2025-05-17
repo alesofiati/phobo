@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Action\Room\CreateOrUpdateRoom;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -30,9 +32,10 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
-        //
+        $room = (new CreateOrUpdateRoom($request))->handle();
+        return response()->json($room, 201);
     }
 
     /**
