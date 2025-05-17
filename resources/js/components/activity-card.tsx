@@ -33,7 +33,7 @@ export default function ActivityCard({ activity }: Props) {
         
 
         <p className="line-clamp-5">
-            {activity.description}
+          {activity.description}
         </p>
         
         <div className="flex flex-row items-center justify-between"> 
