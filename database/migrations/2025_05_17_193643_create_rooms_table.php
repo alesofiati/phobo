@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('code', 4)->unique();
+            $table->string('file_path')->nullable();
             $table->timestamps();
             $table->index('code');
         });
