@@ -11,5 +11,6 @@ Route::group([
 
     Route::post('/', [UserController::class, 'store'])->name('store');
     Route::post('/verify', [UserController::class, 'verify'])->name('verify');
-    Route::resource('rooms', RoomController::class);
 });
+
+Route::resource('rooms', RoomController::class);
