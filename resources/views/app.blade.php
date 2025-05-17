@@ -5,7 +5,7 @@
   <title>Phobos</title>
   @vite('resources/css/app.css')
   @viteReactRefresh
-  @vite('resources/js/app.jsx')
+  @vite('resources/js/app.tsx')
 </head>
 <body>
   <div id="root"></div>
