@@ -22,7 +22,7 @@ class Create
     {
         $user = $this->findUser();
 
-        $this->room = $this->room ?? new Room();
+        $this->room = $this->room ?? new Room;
 
         $this->room->name = $this->request->validated('name');
         $this->room->user_id = $user->id;

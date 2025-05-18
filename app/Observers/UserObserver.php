@@ -9,7 +9,7 @@ class UserObserver
 {
     public function created(User $user): void
     {
-        if (!$user->room_id) {
+        if (! $user->room_id) {
             return;
         }
 

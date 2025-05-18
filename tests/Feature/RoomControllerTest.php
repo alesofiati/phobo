@@ -24,7 +24,7 @@ describe('crud rooms', function () {
                 'teste' => 'dadas'
             ];
             $response = $this->getJson(
-                route("rooms.index", $params)
+                route('rooms.index', $params)
             );
             $response->assertOk();
 
@@ -67,7 +67,7 @@ describe('crud rooms', function () {
             $this->user = User::factory()->create();
             $this->payload = [
                 'nick_name' => $this->user->nick_name,
-                'name' => fake()->name
+                'name' => fake()->name,
             ];
         });
 
@@ -82,8 +82,8 @@ describe('crud rooms', function () {
                 'message',
                 'errors' => [
                     'nick_name',
-                    'name'
-                ]
+                    'name',
+                ],
             ]);
         });
 
@@ -105,7 +105,7 @@ describe('crud rooms', function () {
 
             $payload = [
                 ...$this->payload,
-                'file' => $fakeFile
+                'file' => $fakeFile,
             ];
 
             $response = $this->postJson(route('rooms.store'), $payload);
@@ -114,8 +114,8 @@ describe('crud rooms', function () {
             $response->assertJsonStructure([
                 'message',
                 'errors' => [
-                    'file'
-                ]
+                    'file',
+                ],
             ]);
         });
 
@@ -125,7 +125,7 @@ describe('crud rooms', function () {
 
             $payload = [
                 ...$this->payload,
-                'file' => $fakeFile
+                'file' => $fakeFile,
             ];
 
             $response = $this->postJson(route('rooms.store'), $payload);
@@ -151,7 +151,7 @@ describe('crud rooms', function () {
                 'nick_name' => 'not-exists-nick-name'
             ];
             $response = $this->getJson(
-                route("rooms.show", $params)
+                route('rooms.show', $params)
             );
             $response->assertNotFound();
         });
@@ -163,7 +163,7 @@ describe('crud rooms', function () {
                 'nick_name' => $room->user->nick_name
             ];
             $response = $this->getJson(
-                route("rooms.show", $params)
+                route('rooms.show', $params)
             );
             $response->assertOk();
 
@@ -172,7 +172,7 @@ describe('crud rooms', function () {
                 'user_id',
                 'name',
                 'code',
-                'file_path'
+                'file_path',
             ]);
         });
     });
@@ -180,7 +180,7 @@ describe('crud rooms', function () {
     describe('delete', function () {
         it('return bad request when is not preset query string nick_name', function () {
             $room = Room::factory()->create();
-            $response = $this->deleteJson(route("rooms.destroy", $room->id));
+            $response = $this->deleteJson(route('rooms.destroy', $room->id));
             $response->assertBadRequest();
         });
 
@@ -188,10 +188,10 @@ describe('crud rooms', function () {
             $room = Room::factory()->create();
             $params = [
                 'room' => $room->id,
-                'nick_name' => 'not-exists-nick-name'
+                'nick_name' => 'not-exists-nick-name',
             ];
             $response = $this->deleteJson(
-                route("rooms.destroy", $params)
+                route('rooms.destroy', $params)
             );
             $response->assertNotFound();
         });
@@ -200,10 +200,10 @@ describe('crud rooms', function () {
             $room = Room::factory()->create();
             $params = [
                 'room' => $room->id,
-                'nick_name' => $room->user->nick_name
+                'nick_name' => $room->user->nick_name,
             ];
             $response = $this->deleteJson(
-                route("rooms.destroy", $params)
+                route('rooms.destroy', $params)
             );
             $response->assertNoContent();
 

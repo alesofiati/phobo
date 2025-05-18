@@ -18,7 +18,7 @@ class Room extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'file_path'
+        'file_path',
     ];
 
     protected $appends = [

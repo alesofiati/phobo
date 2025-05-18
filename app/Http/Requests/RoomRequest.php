@@ -24,13 +24,13 @@ class RoomRequest extends FormRequest
     {
         return [
             'nick_name' => [
-                'required', 'exists:users,nick_name'
+                'required', 'exists:users,nick_name',
             ],
             'name' => [
-                'required', 'string', 'max:255'
+                'required', 'string', 'max:255',
             ],
             'file' => [
-                'sometimes', 'file', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'
+                'sometimes', 'file', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048',
             ],
         ];
     }

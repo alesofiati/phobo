@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-
     /**
-     * @param Request $request
      * @return JsonResponse
      */
     public function index(Request $request)
@@ -35,6 +33,7 @@ class RoomController extends Controller
     public function store(RoomRequest $request)
     {
         $room = (new Create($request))->handle();
+
         return response()->json($room, 201);
     }
 
@@ -70,8 +69,6 @@ class RoomController extends Controller
     }
 
     /**
-     * @param int $id
-     * @param Request $request
      * @return JsonResponse
      */
     public function destroy(int $id, Request $request)
@@ -84,10 +81,6 @@ class RoomController extends Controller
         return response()->json([], 204);
     }
 
-    /**
-     * @param Request $request
-     * @return void
-     */
     private function validateNickName(Request $request): void
     {
         if (!$request->get('nick_name', '')) {
