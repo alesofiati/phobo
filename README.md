@@ -73,7 +73,7 @@ Essa aplicação foi criada com ❤️ na [Codecon Universe](https://codecon.dev
 
 ## Licensa
 
-MIT
+[MIT](/LICENSE)
 
 ---
 
