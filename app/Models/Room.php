@@ -22,7 +22,8 @@ class Room extends Model
     ];
 
     protected $appends = [
-        'file_url'
+        'file_url',
+        'nick_name'
     ];
 
     public static function boot(): void
@@ -43,6 +44,11 @@ class Room extends Model
         return $this->file_path ? Storage::url($this->file_path) : '';
     }
 
+    public function getNickNameAttribute(): string
+    {
+        return $this->user->nick_name;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -51,7 +57,7 @@ class Room extends Model
     public function scopeByUserNickName(Builder $query, string $nickName)
     {
         return $query->whereHas('user', function ($query) use ($nickName) {
-            $query->where('nick_name', $nickName);
+            $query->whereNickName($nickName);
         });
     }
 }
