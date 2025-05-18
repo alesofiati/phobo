@@ -45,6 +45,9 @@ $ ./vendor/bin/sail up -d
 # Utilize o sail para instalar as dependências do npm
 $ ./vendor/bin/sail npm i
 
+# Rode as migrations
+$ ./vendor/bin/sail migrate
+
 # Agora é só rodar o projeto
 $ ./vendor/bin/sail composer run dev
 ```
