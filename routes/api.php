@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RankingController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,3 +15,4 @@ Route::group([
 });
 
 Route::resource('rooms', RoomController::class)->only(['index', 'show', 'store', 'destroy']);
+Route::get('ranking', [RankingController::class, '__invoke'])->name('rooms.index');
