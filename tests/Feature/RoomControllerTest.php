@@ -16,7 +16,7 @@ describe('crud rooms', function () {
             $response->assertBadRequest();
         });
 
-        test('return a list of rooms', function () {
+        it('return a list of rooms', function () {
             $params = [
                 'nick_name' => $this->user->nick_name
             ];
