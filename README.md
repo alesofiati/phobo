@@ -14,7 +14,7 @@
   <a href="#aonde-acessar">Aonde acessar</a> •
   <a href="#testes">Testes</a> •
   <a href="#créditos">Créditos</a> •
-  <a href="#licensa">Licensa</a> 
+  <a href="#licença">Licença</a> 
 </p>
 
 ## Funcionalidades
@@ -71,7 +71,7 @@ Quando um jogo tem bons efeitos de feedback e interação com o jogador, dizemos
 
 Essa aplicação foi criada com ❤️ na [Codecon Universe](https://codecon.dev/universe).
 
-## Licensa
+## Licença
 
 [MIT](/LICENSE)
 
