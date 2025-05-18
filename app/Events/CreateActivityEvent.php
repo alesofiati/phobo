@@ -7,6 +7,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+
 // Line removed as it is unused.
 
 class CreateActivityEvent implements ShouldBroadcast
@@ -20,8 +21,7 @@ class CreateActivityEvent implements ShouldBroadcast
         public int $roomId,
         public string $nickname,
         public string $activity,
-    )
-    {
+    ) {
         //
     }
 
