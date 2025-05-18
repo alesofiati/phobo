@@ -46,6 +46,12 @@ $ ./vendor/bin/sail up -d
 # Utilize o sail para instalar as dependências do npm
 $ ./vendor/bin/sail npm i
 
+# Copie o arquivo .env
+$ cp .env.example .env
+
+# Gere as as chaves de aplicação do Laravel
+$ ./vendor/bin/sail key:generate
+
 # Rode as migrations
 $ ./vendor/bin/sail migrate
 
