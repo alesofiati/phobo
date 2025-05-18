@@ -93,7 +93,7 @@ describe('crud rooms', function () {
             assertRoomResponse($response, $this->payload);
         });
 
-        test('return unprocessable entity when file is not a image ', closure: function () {
+        test('returns unprocessable entity when the file is not an image', closure: function () {
 
             $fakeFile = UploadedFile::fake()->create(
                 'room.pdf',
