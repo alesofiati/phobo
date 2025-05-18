@@ -41,9 +41,15 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id, Request $request)
     {
-        //
+        if (!$request->get('nick_name')) {
+            return $this->errorResponse('nick_name is required', 400);
+        }
+
+        $room = Room::byUserNickName($request->get('nick_name'))->findOrFail($id);
+
+        return response()->json($room->except(['created_at', 'updated_at']));
     }
 
     /**
