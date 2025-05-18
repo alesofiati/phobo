@@ -20,10 +20,8 @@
 ## Funcionalidades
 * Login simplificado com nome de usuário
 * Criar salas ([o que é uma sala?](#faq))
-* Compartilhar salas com amigos
 * Criar atividades ([o que é uma atividade?](#faq))
 * Carregar imagens
-* Acompanhar o progresso dos integrantes
 * Interface responsiva (funciona em qualquer tela, pode confiar)
 * Suculência ([o que é suculência?](#faq))
 
@@ -38,12 +36,17 @@ $ git clone https://github.com/alesofiati/phobo
 # Entre no repositório
 $ cd phobo
 
-# Instale as dependências
+# Instale as dependências do composer
 $ composer install
-$ npm install
 
 # Inicie o Laravel Sail
 $ ./vendor/bin/sail up -d
+
+# Utilize o sail para instalar as dependências do npm
+$ ./vendor/bin/sail npm i
+
+# Agora é só rodar o projeto
+$ ./vendor/bin/sail composer run dev
 ```
 
 ## Testes
@@ -59,7 +62,7 @@ $ ./vendor/bin/sail pest --coverage
 A sala é um grupo de pessoas que estão assistindo a mesma série ou anime. Ela serve para reunir essas informações e mostrar quem está na frente em relação aos colegas de sala. 
 
 ## O que é uma atividade?
-As atividades são o ponto central da aplicação: cada usuário pode criar suas próprias atividades dentro das salas que participa. Quando você assiste um episódio novo é uma atividade, quando alguém entra em uma sala é uma atividade e assim segue. A atividade serve para criar o histórico de atividades daquela sala.
+As atividades são o ponto central da aplicação: cada usuário pode criar suas próprias atividades dentro das salas que participa. Quando você assiste um episódio novo é uma atividade. A atividade também serve como um histórico de atividades daquela sala.
 
 ## O que é suculência?
 Quando um jogo tem bons efeitos de feedback e interação com o jogador, dizemos que ele é um bom game feel. Quando ele se preocupa com as mínimas interações a fim de deixar tudo mais divertido, dizemos que ele é um bom game juice. Porém, no Brasil tem uma palavra melhor para isso: **SUCULÊNCIA**. Se tiver vontade de saber mais do tema, veja esse [artigo](https://www.reddit.com/r/gamedev/comments/1adodbd/game_juice_the_difference_between_a_good_game_and/?tl=pt-br).
