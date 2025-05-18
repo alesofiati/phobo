@@ -1,0 +1,4 @@
+### GET rooms list
+GET http://localhost/api/rooms?nick_name=alexandre&per_page=100
+
+###
