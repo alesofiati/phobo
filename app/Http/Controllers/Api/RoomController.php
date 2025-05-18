@@ -6,6 +6,8 @@ use App\Action\Room\Create;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
+use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -39,11 +41,22 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id, Request $request)
+    public function show(string $code, Request $request)
     {
         $this->validateNickName($request);
 
-        $room = Room::byUserNickName($request->get('nick_name'))->findOrFail($id);
+        $nickName = $request->get('nick_name');
+
+        $room = Room::whereCode($code)
+            ->with('user')
+            ->firstOrFail();
+
+        if ($room->user->nick_name !== $nickName) {
+            $user = User::byNickName($nickName)->firstOrFail();
+            if ($room->id !== $user->room_id) {
+                return response()->json(['message' => 'Room not found'], 404);
+            }
+        }
 
         return response()->json($room->except(['created_at', 'updated_at']));
     }
@@ -69,8 +82,8 @@ class RoomController extends Controller
      */
     private function validateNickName(Request $request): void
     {
-        if (!$request->get('nick_name')) {
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(
+        if (!$request->get('nick_name', '')) {
+            throw new HttpResponseException(
                 $this->errorResponse('nick_name is required', 400)
             );
         }
