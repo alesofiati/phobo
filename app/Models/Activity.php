@@ -19,22 +19,22 @@ class Activity extends Model
     protected $fillable = [
         'user_id',
         'room_id',
+        'type',
         'rating',
         'description',
         'image',
         'episode',
         'season',
-        'type',
     ];
-
-    public function room(): BelongsTo
-    {
-        return $this->belongsTo(Room::class);
-    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function room(): BelongsTo
+    {
+        return $this->belongsTo(Room::class);
     }
 
     #[Scope]
