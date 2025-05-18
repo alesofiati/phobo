@@ -8,10 +8,11 @@
 
 <h4 align="center">A plataforma dos viciados em séries — tipo academia, mas pra maratonar!</h4>
 
+[![Veja o vídeo](https://img.youtube.com/vi/nKglN1uNm-A/maxresdefault.jpg)](https://youtu.be/nKglN1uNm-A)
+
 <p align="center">
   <a href="#funcionalidades">Funcionalidades</a> •
   <a href="#como-instalar">Como instalar</a> •
-  <a href="#aonde-acessar">Aonde acessar</a> •
   <a href="#testes">Testes</a> •
   <a href="#créditos">Créditos</a> •
   <a href="#licença">Licença</a> 
