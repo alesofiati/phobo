@@ -5,39 +5,22 @@ import { AnimatePresence } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import ActivityCard from '../components/activity-card'
 import { toast } from 'react-toastify'
+import { useNavigate, useParams } from 'react-router-dom'
+import apiClient from '../libs/api-client'
+import { RoomSchema } from '../schemas/room'
+import RoomCard from '../components/room-card'
+import UserCard from '../components/user-card'
 
-export default function Home() {
-  const [activities, setActivities] = React.useState<Activity[]>([
-    {
-      id: 1,
-      description: 'This is a short activity',
-      nickname: 'Felpera',
-      rating: 5,
-      episode: 1,
-      season: 1,
-      created_at: new Date(),
-    },
-    {
-      id: 2,
-      description: 'This is a very long activity. This have a lot of text. This is a very long activity. This have a lot of text. This is a very long activity. This have a lot of text. This is a very long activity. This have a lot of text.',
-      nickname: 'Felpera',
-      rating: 1,
-      episode: 1,
-      season: 1,
-      created_at: new Date(),
-    },
-    {
-      id: 3,
-      description: 'This is a very long activity with image. This have a lot of text. This is a very long activity. This have a lot of text. This is a very long activity. This have a lot of text. This is a very long activity. This have a lot of text.',
-      nickname: 'Felpera',
-      image: "https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      rating: 3,
-      episode: 1,
-      season: 1,
-      created_at: new Date(),
-    }
-  ])
+export default function Room() {
+  const { id } = useParams<{ id: string }>()
+
+  const [room, setRoom] = React.useState<RoomSchema | null>(null)
+  const [activities, setActivities] = React.useState<Activity[]>([])
+
+  const navigate = useNavigate();
+  
   const newActivityButtonRef = React.useRef<HTMLButtonElement>(null)
+  const newActivityButtonMobileRef = React.useRef<HTMLButtonElement>(null)
 
   const showButtonConfetti = (ref: React.RefObject<HTMLButtonElement | null>) => { 
     const rect = ref.current?.getBoundingClientRect()
@@ -53,8 +36,34 @@ export default function Home() {
     })
   }
 
-  const handleNewActivity = () => { 
-    showButtonConfetti(newActivityButtonRef);
+  const hasFetched = React.useRef(false)
+
+  React.useEffect(() => {
+    const fetchRoom = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
+      try {
+        const response = await apiClient.get(`/api/rooms/${id}`, {
+          params: {
+            nick_name: localStorage.getItem('nickname'),
+          }
+        })
+        setRoom(response)
+      } catch (error) {
+        toast.error("Não conseguimos encontrar a sala!", { 
+          position: 'bottom-center',
+        })
+        navigate('/')
+        console.error('Error fetching room data:', error)
+      }
+    }
+
+    fetchRoom()
+  }, [id])
+
+  const handleNewActivity = (ref: React.RefObject<HTMLButtonElement | null>) => { 
+    showButtonConfetti(ref);
 
     setActivities(activities => [
       {
@@ -72,7 +81,7 @@ export default function Home() {
   const handleShare = async () => { 
     await navigator.clipboard.writeText(window.location.href)
 
-    toast("O link da maratona foi copiado para a área de transferência!", {
+    toast("O link da sala foi copiado para a área de transferência!", {
       type: 'success',
       position: 'bottom-center',
     });
@@ -86,15 +95,15 @@ export default function Home() {
 
       <main className="w-full md:max-w-4xl mx-auto flex flex-row gap-8 h-full p-4 pt-24">
         <div className='hidden md:flex flex-col w-96 gap-6 sticky top-24 self-start h-fit z-10'>
-          <div className='card h-72 bg-red-400 shadow-xl'/>
-          <div className='card h-40 bg-red-400 shadow-xl'/>
+          {room && <RoomCard room={room}/>}
+          {room?.nick_name && <UserCard nick_name={room.nick_name}/>}
           
-          <button ref={newActivityButtonRef} onClick={handleNewActivity} className='btn h-12 btn-primary rounded-lg shadow-xl'>
-            New Activity
+          <button ref={newActivityButtonRef} onClick={() => handleNewActivity(newActivityButtonRef)} className='btn h-12 btn-primary rounded-lg shadow-xl'>
+            Eu assisti mais um episódio
           </button>
 
           <button onClick={handleShare} className='btn h-12 rounded-lg shadow-xl'>
-            Share
+            Compartilhar
           </button>
         </div>
 
@@ -105,8 +114,16 @@ export default function Home() {
           </div>
 
           <p className='block text-xl md:text-2xl font-bold'>
-            Activities
+            Atividade
           </p>
+
+          {activities.length === 0 && (
+            <div className='card bg-base-300 shadow-xl p-4 gap-4 flex flex-row'>
+              <p className="text-center text-slate-500 text-sm">
+                Não há atividades registradas ainda.
+              </p>
+            </div>
+          )}
 
           <AnimatePresence>
             {
@@ -121,8 +138,8 @@ export default function Home() {
         </div>
 
         <div className='md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 gap-4 flex flex-row'>
-          <button onClick={handleNewActivity} className='btn btn-primary rounded-full shadow-xl px-6'>
-            New Activity
+          <button ref={newActivityButtonMobileRef} onClick={() => handleNewActivity(newActivityButtonMobileRef)} className='btn btn-primary rounded-full shadow-xl px-6'>
+            Eu assisti mais um episódio
           </button>
 
           <button onClick={handleShare} className='btn btn-primary rounded-full shadow-xl w-10 h-10 p-0 flex items-center justify-center'>

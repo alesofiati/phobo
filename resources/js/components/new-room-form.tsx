@@ -26,7 +26,9 @@ export default function NewRoomForm({ onSuccess }: Props) {
       formData.append('file', imageFile);
     }
 
-    await apiClient.post('/api/rooms', formData);
+    const result = await apiClient.post('/api/rooms', formData);
+
+    localStorage.setItem('room_id', result.code);
   }
   
   const handleNameChange = (value: string) => {

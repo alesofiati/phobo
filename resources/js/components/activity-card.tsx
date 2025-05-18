@@ -31,7 +31,6 @@ export default function ActivityCard({ activity }: Props) {
           }
         </div>
         
-
         <p className="line-clamp-5">
           {activity.description}
         </p>
@@ -48,17 +47,17 @@ export default function ActivityCard({ activity }: Props) {
           </div>
 
           <div className="flex flex-row items-center gap-2 text-sm text-gray-500"> 
-            (Season {activity.season} Episode {activity.episode})
+            (Temp. {activity.season} Ep. {activity.episode})
 
-          {
-            activity.created_at && <p>
-              {new Date(activity.created_at).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })}
-            </p>
-          }
+            {
+              activity.created_at && <p>
+                {new Date(activity.created_at).toLocaleDateString('pt-BR', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                })}
+              </p>
+            }
           </div>
         </div>
       </div>

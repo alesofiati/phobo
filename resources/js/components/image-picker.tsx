@@ -40,7 +40,7 @@ export default function ImagePicker({
       />
 
       <div className='absolute bottom-4 left-4'>
-        <button className='btn btn-outline btn-sm btn-soft  gap-2'>
+        <button type='button' className='btn btn-outline btn-sm btn-soft gap-2'>
           Adiciona capa
         </button>
       </div>

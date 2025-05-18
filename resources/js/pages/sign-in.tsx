@@ -2,16 +2,18 @@ import React from 'react'
 import MeteorsBackground from '../components/meteors-background'
 import NewUserForm from '../components/new-user-form'
 import NewRoomForm from '../components/new-room-form'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
   const [step, setStep] = React.useState(0)
+  const navigate = useNavigate();
 
   const handleOnSignInSuccess = () => {
     setStep(1)
   }
 
   const handleOnRoomCreated = () => {
-    window.location.href = '/sala/' + localStorage.getItem('room_id')
+    navigate("/sala/" + localStorage.getItem('room_id'));
   }
 
   return (
