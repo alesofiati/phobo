@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Activity extends Model
 {
@@ -26,6 +27,15 @@ class Activity extends Model
         'episode',
         'season',
     ];
+
+    protected $appends = [
+        'image_url'
+    ];
+
+    public function getImageUrlAttribute(): string
+    {
+        return $this->image ? Storage::url($this->image) : '';
+    }
 
     public function user(): BelongsTo
     {
