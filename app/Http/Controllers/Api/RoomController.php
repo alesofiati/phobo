@@ -18,9 +18,7 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        if (!$request->get('nick_name')) {
-            return $this->errorResponse('nick_name is required', 400);
-        }
+        $this->validateNickName($request);
 
         $rooms = Room::byUserNickName($request->get('nick_name'))
             ->select('id', 'name', 'code', 'created_at')
@@ -43,9 +41,7 @@ class RoomController extends Controller
      */
     public function show(int $id, Request $request)
     {
-        if (!$request->get('nick_name')) {
-            return $this->errorResponse('nick_name is required', 400);
-        }
+        $this->validateNickName($request);
 
         $room = Room::byUserNickName($request->get('nick_name'))->findOrFail($id);
 
@@ -61,10 +57,28 @@ class RoomController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param int $id
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(int $id, Request $request)
     {
-        //
+        $this->validateNickName($request);
+
+        $room = Room::byUserNickName($request->get('nick_name'))->findOrFail($id);
+        $room->delete();
+
+        return response()->json([], 204);
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    private function validateNickName(Request $request): void
+    {
+        if (!$request->get('nick_name')) {
+            abort($this->errorResponse('nick_name is required', 400));
+        }
     }
 }
