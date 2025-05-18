@@ -35,7 +35,7 @@ Para baixar e rodar essa aplicação, você precisará de [Git](https://git-scm.
 # Baixe o código
 $ git clone https://github.com/alesofiati/phobo
 
-# Entre no reposítorio
+# Entre no repositório
 $ cd phobo
 
 # Instale as dependências
