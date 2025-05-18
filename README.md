@@ -20,7 +20,6 @@
 ## Funcionalidades
 * Login simplificado com nome de usuário
 * Criar salas ([o que é uma sala?](#faq))
-* Compartilhar salas com amigos
 * Criar atividades ([o que é uma atividade?](#faq))
 * Carregar imagens
 * Acompanhar o progresso dos integrantes

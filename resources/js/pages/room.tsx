@@ -77,7 +77,6 @@ export default function Room() {
 
   const handleSaveActivity = (activity: Activity) => {
     setActivities(prev => [activity, ...prev])
-    toast.success('Atividade adicionada com sucesso!')
     showButtonConfetti(newActivityButtonMobileRef.current ? newActivityButtonRef : newActivityButtonMobileRef)
   }
 
@@ -100,9 +99,9 @@ export default function Room() {
             Eu assisti mais um episódio
           </button>
 
-          <button onClick={handleShare} className='btn h-12 rounded-lg shadow-xl'>
+          {/* <button onClick={handleShare} className='btn h-12 rounded-lg shadow-xl'>
             Compartilhar
-          </button>
+          </button> */}
         </div>
 
         <div className='flex flex-col gap-6 w-full'>

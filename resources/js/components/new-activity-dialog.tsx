@@ -17,7 +17,7 @@ const NewActivityDialog: React.FC<NewActivityDialogProps> = ({ setIsDialogOpen, 
     description: '',
     episode: 0,
     season: 0,
-    rating: 0,
+    rating: 5,
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -28,7 +28,12 @@ const NewActivityDialog: React.FC<NewActivityDialogProps> = ({ setIsDialogOpen, 
     }))
   }
 
+  const [isSaving, setIsSaving] = useState(false)
+
   const handleSaveActivity = async () => {
+    if (isSaving) return
+    setIsSaving(true)
+
     try {
       await apiClient.post('/api/activities', activityData)
       toast.success('Atividade adicionada com sucesso!')
@@ -37,6 +42,16 @@ const NewActivityDialog: React.FC<NewActivityDialogProps> = ({ setIsDialogOpen, 
     } catch (error) {
       toast.error('Erro ao adicionar a atividade.')
       console.error(error)
+    } finally {
+      setActivityData({
+        nick_name: localStorage.getItem('nickname') || '',
+        room_code: localStorage.getItem('room_id') || '',
+        description: '',
+        episode: 0,
+        season: 0,
+        rating: 5,
+      })
+      setIsSaving(false)
     }
   }
 
@@ -104,10 +119,10 @@ const NewActivityDialog: React.FC<NewActivityDialogProps> = ({ setIsDialogOpen, 
           </div>
 
           <div className="modal-action">
-            <button className="btn btn-primary" onClick={handleSaveActivity}>
-              Salvar
+            <button className="btn btn-primary" onClick={handleSaveActivity} disabled={isSaving}>
+              {isSaving ? 'Salvando...' : 'Salvar'}
             </button>
-            <button className="btn" onClick={onClose}> {/* Fechar o modal ao clicar no botão "Fechar" */}
+            <button className="btn" onClick={onClose}>
               Fechar
             </button>
           </div>
