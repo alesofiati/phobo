@@ -11,7 +11,7 @@ describe('crud rooms', function () {
             $this->user = User::factory()->create();
         });
 
-        it('return bad request when is not preset query string nick_name', function () {
+        it('returns bad request when the \'nick_name\' query parameter is missing', function () {
             $response = $this->getJson(route('rooms.index'));
             $response->assertBadRequest();
         });
