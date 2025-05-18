@@ -52,6 +52,6 @@ class Create
 
     private function findRoom(): ?Room
     {
-        return Room::byRoomCode($this->request->validated('room_code'));
+        return Room::byRoomCode($this->request->validated('room_code'))->first();
     }
 }
