@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const schema = z.object({ 
+export const schema = z.object({ 
   id: z.number().optional(),
   user_id: z.number().optional(), 
   nickname: z.string().min(1).max(255),
