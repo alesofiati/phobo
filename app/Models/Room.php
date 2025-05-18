@@ -54,6 +54,11 @@ class Room extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeByRoomCode(Builder $query, string $code): Builder
+    {
+        return $query->where('code', $code);
+    }
+
     public function scopeByUserNickName(Builder $query, string $nickName)
     {
         return $query->whereHas('user', function ($query) use ($nickName) {

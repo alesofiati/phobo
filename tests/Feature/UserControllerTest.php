@@ -8,8 +8,8 @@ describe('crud users', function () {
         $response->assertExactJsonStructure([
             'message',
             'errors' => [
-                'nick_name'
-            ]
+                'nick_name',
+            ],
         ]);
         $response->assertJsonValidationErrors('nick_name');
         $response->assertStatus(422);
@@ -19,13 +19,13 @@ describe('crud users', function () {
         $user = User::factory()->create();
 
         $response = $this->postJson('/api/users', [
-            'nick_name' => $user->nick_name
+            'nick_name' => $user->nick_name,
         ]);
         $response->assertExactJsonStructure([
             'message',
             'errors' => [
-                'nick_name'
-            ]
+                'nick_name',
+            ],
         ]);
         $response->assertJsonValidationErrors('nick_name');
         $response->assertStatus(422);
@@ -34,14 +34,14 @@ describe('crud users', function () {
     test('return 201 when create a new user', function () {
 
         $payload = [
-            'nick_name' => 'test'
+            'nick_name' => 'test',
         ];
 
         $response = $this->postJson('/api/users', $payload);
         $response->assertCreated();
         $response->assertJsonStructure([
             'id',
-            'nick_name'
+            'nick_name',
         ]);
         $this->assertDatabaseHas('users', $payload);
     });
@@ -49,7 +49,7 @@ describe('crud users', function () {
 describe('verify if nick_name already exists in database', function () {
     test('return 200 when nick_name does exist in database', function () {
         $response = $this->postJson('/api/users/verify', [
-            'nick_name' => Str::slug(fake()->unique()->name)
+            'nick_name' => Str::slug(fake()->unique()->name),
         ]);
         $response->assertOk();
         $response->assertExactJsonStructure(['message']);
@@ -58,7 +58,7 @@ describe('verify if nick_name already exists in database', function () {
     test('return 409 when nick_name exist in database', function () {
         $user = User::factory()->create();
         $response = $this->postJson('/api/users/verify', [
-            'nick_name' => $user->nick_name
+            'nick_name' => $user->nick_name,
         ]);
         $response->assertConflict();
         $response->assertExactJsonStructure(['message']);

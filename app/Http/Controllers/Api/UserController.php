@@ -12,9 +12,9 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create($request->validated());
+
         return response()->json(
-            $user->only(['id', 'nick_name'])
-        , 201);
+            $user->only(['id', 'nick_name']), 201);
     }
 
     public function verify(Request $request)

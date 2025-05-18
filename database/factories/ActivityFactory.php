@@ -2,21 +2,18 @@
 
 namespace Database\Factories;
 
-use App\ActivityTypeEnum;
+use App\Enums\ActivityTypeEnum;
 use App\Models\Activity;
-use App\Models\Room;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Activity>
+ */
 class ActivityFactory extends Factory
 {
-    protected $model = Activity::class;
-
     public function definition(): array
     {
         return [
-            //'user_id' => User::factory()->create()->id,
-            //'room_id' => Room::factory()->create()->id,
             'type' => $this->faker->randomElement(ActivityTypeEnum::values()),
             'rating' => $this->faker->numberBetween(1, 5),
             'description' => $this->faker->text(),
