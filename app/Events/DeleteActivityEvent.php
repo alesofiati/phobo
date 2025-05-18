@@ -17,9 +17,7 @@ class DeleteActivityEvent implements ShouldBroadcast
      */
     public function __construct(
         public int $activityId
-    )
-    {
-    }
+    ) {}
 
     /**
      * Get the channels the event should broadcast on.
