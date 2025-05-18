@@ -25,7 +25,7 @@
 * Carregar de imagens
 * Acompanhar o progresso dos integrantes
 * Interface responsiva (funciona em qualquer tela, pode confiar)
-* Suculência ([o que é sulência?](#faq))
+* Suculência ([o que é suculência?](#faq))
 
 
 ## Como instalar
