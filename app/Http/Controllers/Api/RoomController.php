@@ -63,6 +63,7 @@ class RoomController extends Controller
             'code',
             'name',
             'user_id',
+            'nick_name',
             'file_url',
             'file_path'
         ]));
