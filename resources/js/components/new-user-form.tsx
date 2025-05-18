@@ -1,9 +1,14 @@
 import React from 'react'
 import { FormEvent, useState } from "react"
 import apiClient, { ErrorBag } from "../libs/api-client"
+import ErrorMessage from './error-message'
 
-export default function NewUserForm() { 
-  const [nickname, setNickname] = useState('')
+interface Props {
+  onSuccess: () => void
+}
+
+export default function NewUserForm({ onSuccess }: Props) { 
+  const [nickname, setNickname] = useState<string>('')
   const [errors, setErrors] = useState<ErrorBag | null>(null)
 
   const createUser = async () => {
@@ -25,7 +30,8 @@ export default function NewUserForm() {
     e.preventDefault()
 
     try {
-      createUser()
+      await createUser()
+      onSuccess()
     } catch (error) {
       if (error instanceof ErrorBag) {
         setErrors(error)
@@ -51,11 +57,7 @@ export default function NewUserForm() {
         <button type="submit" className="btn btn-primary">Entrar</button>
       </div>
       
-      {errors?.errors.nick_name && (
-        <span className="text-center text-red-300 text-sm">
-          {errors.errors.nick_name[0]}
-        </span>
-      )}
+      {errors && <ErrorMessage errorBag={errors} />}
 
       {!errors && <p className='text-center text-sm text-gray-500'>Pra que senha? Só coloque um apelido!</p>}
     </form>

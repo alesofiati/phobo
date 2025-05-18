@@ -10,9 +10,9 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/sign-in" element={<SignIn />} />
-      <Route path="/room/:id" element={<Room />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/entrar" element={<SignIn />} />
+      <Route path="/sala/:id" element={<Room />} />
+      <Route path="/sobre" element={<About />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
