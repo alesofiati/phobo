@@ -14,7 +14,7 @@ class UserObserver
         }
 
         $user->activities()->create([
-            'room_id' => $user->id,
+            'room_id' => $user->room_id,
             'type' => ActivityTypeEnum::USER_INVITED->value,
         ]);
     }
