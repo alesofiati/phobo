@@ -1,61 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">
+  <br>
+  <a href="https://github.com/alesofiati/phobo"><img src="/logo.png" alt="Phobos" style="border: 3px solid black;" width="200"></a>
+  <br>
+  Phobos
+  <br>
+</h1>
+
+<h4 align="center">A plataforma dos viciados em séries — tipo academia, mas pra maratonar!</h4>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="#funcionalidades">Funcionalidades</a> •
+  <a href="#como-instalar">Como instalar</a> •
+  <a href="#aonde-acessar">Aonde acessar</a> •
+  <a href="#testes">Testes</a> •
+  <a href="#créditos">Créditos</a> •
+  <a href="#licensa">Licensa</a> 
 </p>
 
-## About Laravel
+## Funcionalidades
+* Login simplificado com nome de usuário
+* Criar salas ([o que é uma sala?](#faq))
+* Compartilhar salas com amigos
+* Criar atividades ([o que é uma atividade?](#faq))
+* Carregar de imagens
+* Acompanhar o progresso dos integrantes
+* Interface responsiva (funciona em qualquer tela, pode confiar)
+* Suculência ([o que é sulência?](#faq))
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Como instalar
+Para baixar e rodar essa aplicação, você precisará de [Git](https://git-scm.com), [NodeJS](https://nodejs.org/en/download), [PHP 8.4](https://php.watch/articles/php-84-install-upgrade-guide-debian-ubuntu) e [Composer](https://getcomposer.org/download/) instalados no seu computador. No seu terminal favorito, digite:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+# Baixe o código
+$ git clone https://github.com/alesofiati/phobo
 
-## Learning Laravel
+# Entre no reposítorio
+$ cd phobo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Instale as dependências
+$ composer install
+$ npm install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+# Inicie o Laravel Sail
+$ ./vendor/bin/sail up -d
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Aonde acessar
+Você pode acessar a aplicação direto pelo site [https://www.phobos.com](https://www.phobos.com).
 
-## Laravel Sponsors
+## Testes
+A aplicação contém testes. Eles estão dentro da pasta /tests. Utilizamos o [Pest](https://pestphp.com) para criar testes com mais facilidade e entender de forma fácil como a cobertura da aplicação estava evoluindo. Para rodar os testes, basta seguir os comandos:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+# Rode os testes com cobertura
+$ ./vendor/bin/sail pest --coverage
+```
 
-### Premium Partners
+# FAQ
+## O que é uma sala? 
+A sala é um grupo de pessoas que estão assistindo a mesma série ou anime. Ela serve para reunir essas informações e mostrar quem está na frente em relação aos colegas de sala. 
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## O que é uma atividade?
+As atividades são o ponto central da aplicação: cada usuário pode criar suas próprias atividades dentro das salas que participa. Quando você assiste um episódio novo é uma atividade, quando alguém entra em uma sala é uma atividade e assim segue. A atividade serve para criar o histórico de atividades daquela sala.
 
-## Contributing
+## O que é suculência?
+Quando um jogo tem bons efeitos de feedback e interação com o jogador, dizemos que ele um bom game feel. Quando ele se preocupa com as mínimas interações a fim de deixar tudo mais divertido, dizemos que ele um bom game juice. Porém, no Brasil tem uma palavra melhor para isso: **SUCULÊNCIA**. Se tiver vontade de saber mais do tema, veja esse [artigo](https://www.reddit.com/r/gamedev/comments/1adodbd/game_juice_the_difference_between_a_good_game_and/?tl=pt-br).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Créditos
 
-## Code of Conduct
+Essa aplicação foi criada com ❤️ na [Codecon Universe](https://codecon.dev/universe).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Licensa
 
-## Security Vulnerabilities
+MIT
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+> Felipe Passos &nbsp;&middot;&nbsp;
+> GitHub [@Berkspar](https://github.com/berkspar) &nbsp;&middot;&nbsp;
+> LinkedIn [in/berkspar](https://www.linkedin.com/in/berkspar)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> Alexandre Soffiatti &nbsp;&middot;&nbsp;
+> GitHub [@Alesofiati](https://github.com/alesofiati) &nbsp;&middot;&nbsp;
+> LinkedIn [in/alexandre-soffiatti](https://www.linkedin.com/in/alexandre-soffiatti-939185ba/)
+
+> Nícollas Matheus &nbsp;&middot;&nbsp;
+> GitHub [@NicollasMatheus37](https://github.com/NicollasMatheus37) &nbsp;&middot;&nbsp;
+> LinkedIn [in/nicollas-matheus](https://www.linkedin.com/in/nicollas-matheus-2425b3148/)
+
+
