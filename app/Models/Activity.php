@@ -36,7 +36,7 @@ class Activity extends Model
     {
         return $this->image ? Storage::url($this->image) : '';
     }
-
+  
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
