@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Room extends Model
@@ -21,6 +22,10 @@ class Room extends Model
         'file_path'
     ];
 
+    protected $appends = [
+        'file_url'
+    ];
+
     public static function boot(): void
     {
         parent::boot();
@@ -32,6 +37,11 @@ class Room extends Model
             } while ($exists);
             $model->code = $code;
         });
+    }
+
+    public function getFileUrlAttribute(): string
+    {
+        return $this->file_path ? Storage::url($this->file_path) : '';
     }
 
     public function user(): BelongsTo

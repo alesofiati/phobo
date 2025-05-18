@@ -89,7 +89,6 @@ describe('crud rooms', function () {
 
             $response->assertCreated();
 
-
             assertRoomResponse($response, $this->payload);
         });
 
@@ -118,7 +117,7 @@ describe('crud rooms', function () {
         });
 
         test('create a room with file upload', closure: function () {
-            Storage::fake('local');
+            Storage::fake('public');
             $fakeFile = UploadedFile::fake()->image('room.png');
 
             $payload = [
@@ -218,7 +217,8 @@ function assertRoomResponse($response, $payload): void
         'user_id',
         'name',
         'code',
-        'file_path'
+        'file_path',
+        'file_url',
     ]);
 
     $user = User::find($response->json('user_id'));
