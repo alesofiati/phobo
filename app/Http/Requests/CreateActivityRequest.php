@@ -37,7 +37,7 @@ class CreateActivityRequest extends FormRequest
                 'required', 'string'
             ],
             'image' => [
-                'required', 'image'
+                'image'
             ],
             'episode' => [
                 'required', 'integer'
