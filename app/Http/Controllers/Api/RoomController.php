@@ -21,7 +21,7 @@ class RoomController extends Controller
         $this->validateNickName($request);
 
         $rooms = Room::byUserNickName($request->get('nick_name'))
-            ->select('id', 'name', 'code', 'created_at')
+            ->select('id', 'name', 'code', 'created_at', 'file_path', 'user_id')
             ->paginate($request->get('per_page', 10));
 
         return response()->json($rooms);
@@ -57,7 +57,14 @@ class RoomController extends Controller
             }
         }
 
-        return response()->json($room->except(['created_at', 'updated_at']));
+        return response()->json($room->only([
+            'id',
+            'code',
+            'name',
+            'user_id',
+            'file_url',
+            'file_path'
+        ]));
     }
 
     /**

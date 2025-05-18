@@ -16,7 +16,7 @@ export default function RoomCard({ room }: Props) {
         {room.file_url && <img
           src={room.file_url}
           alt='Image cover'
-          className='h-24 w-full object-cover'
+          className='h-40 rounded-md w-full object-cover'
         />}
       </div>
     </div>

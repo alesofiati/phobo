@@ -46,9 +46,6 @@ $ npm install
 $ ./vendor/bin/sail up -d
 ```
 
-## Aonde acessar
-Você pode acessar a aplicação direto pelo site [https://www.phobos.com](https://www.phobos.com).
-
 ## Testes
 A aplicação contém testes. Eles estão dentro da pasta /tests. Utilizamos o [Pest](https://pestphp.com) para criar testes com mais facilidade e entender de forma fácil como a cobertura da aplicação estava evoluindo. Para rodar os testes, basta seguir os comandos:
 

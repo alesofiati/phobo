@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IconShare } from '@tabler/icons-react'
 import { Activity } from '../schemas/activity'
 import { AnimatePresence } from 'framer-motion'
@@ -10,14 +10,15 @@ import apiClient from '../libs/api-client'
 import { RoomSchema } from '../schemas/room'
 import RoomCard from '../components/room-card'
 import UserCard from '../components/user-card'
+import NewActivityDialog from '../components/new-activity-dialog'
 
 export default function Room() {
   const { id } = useParams<{ id: string }>()
 
-  const [room, setRoom] = React.useState<RoomSchema | null>(null)
-  const [activities, setActivities] = React.useState<Activity[]>([])
-
-  const navigate = useNavigate();
+  const [room, setRoom] = useState<RoomSchema | null>(null)
+  const [activities, setActivities] = useState<Activity[]>([])
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const navigate = useNavigate()
   
   const newActivityButtonRef = React.useRef<HTMLButtonElement>(null)
   const newActivityButtonMobileRef = React.useRef<HTMLButtonElement>(null)
@@ -40,8 +41,8 @@ export default function Room() {
 
   React.useEffect(() => {
     const fetchRoom = async () => {
-      if (hasFetched.current) return;
-      hasFetched.current = true;
+      if (hasFetched.current) return
+      hasFetched.current = true
 
       try {
         const response = await apiClient.get(`/api/rooms/${id}`, {
@@ -63,28 +64,25 @@ export default function Room() {
   }, [id])
 
   const handleNewActivity = (ref: React.RefObject<HTMLButtonElement | null>) => { 
-    showButtonConfetti(ref);
-
-    setActivities(activities => [
-      {
-        id: Math.random(),
-        description: 'This is a new activity',
-        nickname: 'Felpera',
-        rating: 5,
-        episode: 1,
-        season: 1,
-      },
-      ...activities
-    ]);
+    setIsDialogOpen(true)
   }
 
   const handleShare = async () => { 
     await navigator.clipboard.writeText(window.location.href)
-
     toast("O link da sala foi copiado para a área de transferência!", {
       type: 'success',
       position: 'bottom-center',
-    });
+    })
+  }
+
+  const handleSaveActivity = (activity: Activity) => {
+    setActivities(prev => [activity, ...prev])
+    toast.success('Atividade adicionada com sucesso!')
+    showButtonConfetti(newActivityButtonMobileRef.current ? newActivityButtonRef : newActivityButtonMobileRef)
+  }
+
+  const handleCloseModal = () => {
+    setIsDialogOpen(false) 
   }
 
   return (
@@ -109,8 +107,8 @@ export default function Room() {
 
         <div className='flex flex-col gap-6 w-full'>
           <div className='md:hidden w-full gap-6 flex flex-col'>
-            <div className='card h-72 bg-red-400 shadow-xl'/>
-            <div className='card h-40 bg-red-400 shadow-xl'/> 
+            {room && <RoomCard room={room}/>}
+            {room?.nick_name && <UserCard nick_name={room.nick_name}/>}
           </div>
 
           <p className='block text-xl md:text-2xl font-bold'>
@@ -147,6 +145,13 @@ export default function Room() {
           </button>
         </div>
       </main>
+
+      <NewActivityDialog
+        setIsDialogOpen={setIsDialogOpen}
+        isDialogOpen={isDialogOpen}
+        onSave={handleSaveActivity}
+        onClose={handleCloseModal}
+      />
     </div>
   )
 }

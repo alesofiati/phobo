@@ -39,11 +39,11 @@ export default function ActivityCard({ activity }: Props) {
           <div className="flex flex-row items-center gap-2"> 
             <img
               className="w-6 h-6 rounded-md"
-              src={getDiceBearAvatar(activity.nickname)}
+              src={getDiceBearAvatar(activity.nick_name)}
               alt="avatar" 
             />
 
-            {activity.nickname}
+            {activity.nick_name}
           </div>
 
           <div className="flex flex-row items-center gap-2 text-sm text-gray-500"> 
