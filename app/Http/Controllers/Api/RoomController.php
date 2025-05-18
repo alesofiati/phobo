@@ -48,6 +48,7 @@ class RoomController extends Controller
         $nickName = $request->get('nick_name');
 
         $room = Room::whereCode($code)
+            ->with('user')
             ->firstOrFail();
 
         if ($room->user->nick_name !== $nickName) {
