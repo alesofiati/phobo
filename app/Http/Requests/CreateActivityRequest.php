@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateActivityRequest extends FormRequest
@@ -17,12 +18,10 @@ class CreateActivityRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
-
-
         return [
             'nick_name' => [
                 'required', 'string', 'exists:users,nick_name'
@@ -34,7 +33,7 @@ class CreateActivityRequest extends FormRequest
                 'required', 'integer', 'between:1,5'
             ],
             'description' => [
-                'required', 'string'
+                'sometimes', 'string'
             ],
             'image' => [
                 'image'
