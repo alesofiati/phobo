@@ -4,6 +4,7 @@ import { Activity } from '../schemas/activity'
 import { AnimatePresence } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import ActivityCard from '../components/activity-card'
+import { toast } from 'react-toastify'
 
 export default function Home() {
   const [activities, setActivities] = React.useState<Activity[]>([
@@ -68,6 +69,15 @@ export default function Home() {
     ]);
   }
 
+  const handleShare = async () => { 
+    await navigator.clipboard.writeText(window.location.href)
+
+    toast("O link da maratona foi copiado para a área de transferência!", {
+      type: 'success',
+      position: 'bottom-center',
+    });
+  }
+
   return (
     <div className='w-screen min-h-screen flex flex-col'>
       <div className="navbar fixed top-0 left-0 right-0 z-50 bg-base-300 shadow-sm justify-center">
@@ -83,7 +93,7 @@ export default function Home() {
             New Activity
           </button>
 
-          <button className='btn h-12 rounded-lg shadow-xl'>
+          <button onClick={handleShare} className='btn h-12 rounded-lg shadow-xl'>
             Share
           </button>
         </div>
@@ -111,11 +121,11 @@ export default function Home() {
         </div>
 
         <div className='md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 gap-4 flex flex-row'>
-          <button className='btn btn-primary rounded-full shadow-xl px-6'>
+          <button onClick={handleNewActivity} className='btn btn-primary rounded-full shadow-xl px-6'>
             New Activity
           </button>
 
-          <button className='btn btn-primary rounded-full shadow-xl w-10 h-10 p-0 flex items-center justify-center'>
+          <button onClick={handleShare} className='btn btn-primary rounded-full shadow-xl w-10 h-10 p-0 flex items-center justify-center'>
             <IconShare className='w-5 h-5' />
           </button>
         </div>
