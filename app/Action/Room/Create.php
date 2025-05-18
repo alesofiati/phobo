@@ -5,9 +5,8 @@ namespace App\Action\Room;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 
-class CreateOrUpdateRoom
+class Create
 {
 
     public function __construct(
@@ -25,8 +24,6 @@ class CreateOrUpdateRoom
 
         $this->room->name = $this->roomRequest->validated('name');
         $this->room->user_id = $user->id;
-
-        $this->removeOldFile();
 
         $this->room->file_path = $this->uploadFile();
 
@@ -51,12 +48,5 @@ class CreateOrUpdateRoom
             return "rooms/$fileName";
         }
         return null;
-    }
-
-    private function removeOldFile(): void
-    {
-        if ($this->roomRequest->hasFile('file') && $this->room->file_path) {
-            Storage::disk('public')->delete($this->room->file_path);
-        }
     }
 }

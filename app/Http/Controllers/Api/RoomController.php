@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Action\Room\CreateOrUpdateRoom;
+use App\Action\Room\Create;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
@@ -32,7 +32,7 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
-        $room = (new CreateOrUpdateRoom($request))->handle();
+        $room = (new Create($request))->handle();
         return response()->json($room, 201);
     }
 
@@ -46,14 +46,6 @@ class RoomController extends Controller
         $room = Room::byUserNickName($request->get('nick_name'))->findOrFail($id);
 
         return response()->json($room->except(['created_at', 'updated_at']));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**
