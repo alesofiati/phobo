@@ -70,7 +70,9 @@ class RoomController extends Controller
     private function validateNickName(Request $request): void
     {
         if (!$request->get('nick_name')) {
-            abort($this->errorResponse('nick_name is required', 400));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(
+                $this->errorResponse('nick_name is required', 400)
+            );
         }
     }
 }
